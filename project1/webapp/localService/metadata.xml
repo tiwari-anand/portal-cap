@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="LowCodeService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Category" EntityType="LowCodeService.Category"/>
+                <EntitySet Name="Category_texts" EntityType="LowCodeService.Category_texts"/>
+                <EntitySet Name="DraftAdministrativeData" EntityType="LowCodeService.DraftAdministrativeData"/>
+                <EntitySet Name="Incidents" EntityType="LowCodeService.Incidents"/>
+                <FunctionImport Name="Incidents_draftPrepare" EntitySet="Incidents" ReturnType="LowCodeService.Incidents" m:HttpMethod="POST" sap:action-for="LowCodeService.Incidents">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="Incidents_draftActivate" EntitySet="Incidents" ReturnType="LowCodeService.Incidents" m:HttpMethod="POST" sap:action-for="LowCodeService.Incidents">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="Incidents_draftEdit" EntitySet="Incidents" ReturnType="LowCodeService.Incidents" m:HttpMethod="POST" sap:action-for="LowCodeService.Incidents">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="PreserveChanges" Type="Edm.Boolean" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="Individual" EntityType="LowCodeService.Individual"/>
+                <EntitySet Name="Individual_texts" EntityType="LowCodeService.Individual_texts"/>
+                <EntitySet Name="Priority" EntityType="LowCodeService.Priority"/>
+                <EntitySet Name="Priority_texts" EntityType="LowCodeService.Priority_texts"/>
+                <EntitySet Name="Status" EntityType="LowCodeService.Status"/>
+                <EntitySet Name="Status_texts" EntityType="LowCodeService.Status_texts"/>
+                <AssociationSet Name="Category_texts_1" Association="LowCodeService.Category_texts_1">
+                    <End Role="Category" EntitySet="Category"/>
+                    <End Role="Category_texts" EntitySet="Category_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Category_localized" Association="LowCodeService.Category_localized">
+                    <End Role="Category" EntitySet="Category"/>
+                    <End Role="Category_texts" EntitySet="Category_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Incidents_status" Association="LowCodeService.Incidents_status">
+                    <End Role="Incidents" EntitySet="Incidents"/>
+                    <End Role="Status" EntitySet="Status"/>
+                </AssociationSet>
+                <AssociationSet Name="Incidents_category" Association="LowCodeService.Incidents_category">
+                    <End Role="Incidents" EntitySet="Incidents"/>
+                    <End Role="Category" EntitySet="Category"/>
+                </AssociationSet>
+                <AssociationSet Name="Incidents_priority" Association="LowCodeService.Incidents_priority">
+                    <End Role="Incidents" EntitySet="Incidents"/>
+                    <End Role="Priority" EntitySet="Priority"/>
+                </AssociationSet>
+                <AssociationSet Name="Incidents_assignedIndividual" Association="LowCodeService.Incidents_assignedIndividual">
+                    <End Role="Incidents" EntitySet="Incidents"/>
+                    <End Role="Individual" EntitySet="Individual"/>
+                </AssociationSet>
+                <AssociationSet Name="Incidents_DraftAdministrativeData" Association="LowCodeService.Incidents_DraftAdministrativeData">
+                    <End Role="Incidents" EntitySet="Incidents"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="Incidents_SiblingEntity" Association="LowCodeService.Incidents_SiblingEntity">
+                    <End Role="Incidents" EntitySet="Incidents"/>
+                    <End Role="Incidents1" EntitySet="Incidents"/>
+                </AssociationSet>
+                <AssociationSet Name="Individual_texts_1" Association="LowCodeService.Individual_texts_1">
+                    <End Role="Individual" EntitySet="Individual"/>
+                    <End Role="Individual_texts" EntitySet="Individual_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Individual_localized" Association="LowCodeService.Individual_localized">
+                    <End Role="Individual" EntitySet="Individual"/>
+                    <End Role="Individual_texts" EntitySet="Individual_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Priority_texts_1" Association="LowCodeService.Priority_texts_1">
+                    <End Role="Priority" EntitySet="Priority"/>
+                    <End Role="Priority_texts" EntitySet="Priority_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Priority_localized" Association="LowCodeService.Priority_localized">
+                    <End Role="Priority" EntitySet="Priority"/>
+                    <End Role="Priority_texts" EntitySet="Priority_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Status_texts_1" Association="LowCodeService.Status_texts_1">
+                    <End Role="Status" EntitySet="Status"/>
+                    <End Role="Status_texts" EntitySet="Status_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Status_localized" Association="LowCodeService.Status_localized">
+                    <End Role="Status" EntitySet="Status"/>
+                    <End Role="Status_texts" EntitySet="Status_texts"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Category">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="LowCodeService.Category_texts_1" FromRole="Category" ToRole="Category_texts"/>
+                <NavigationProperty Name="localized" Relationship="LowCodeService.Category_localized" FromRole="Category" ToRole="Category_texts"/>
+            </EntityType>
+            <EntityType Name="Category_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Incidents">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="100"/>
+                <Property Name="description" Type="Edm.String" MaxLength="100"/>
+                <Property Name="lti" Type="Edm.Boolean"/>
+                <NavigationProperty Name="status" Relationship="LowCodeService.Incidents_status" FromRole="Incidents" ToRole="Status"/>
+                <Property Name="location" Type="Edm.String"/>
+                <NavigationProperty Name="category" Relationship="LowCodeService.Incidents_category" FromRole="Incidents" ToRole="Category"/>
+                <NavigationProperty Name="priority" Relationship="LowCodeService.Incidents_priority" FromRole="Incidents" ToRole="Priority"/>
+                <Property Name="closed_on" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="assignedIndividual" Relationship="LowCodeService.Incidents_assignedIndividual" FromRole="Incidents" ToRole="Individual"/>
+                <Property Name="status_code" Type="Edm.String" MaxLength="20"/>
+                <Property Name="category_code" Type="Edm.String" MaxLength="20"/>
+                <Property Name="priority_code" Type="Edm.String" MaxLength="20"/>
+                <Property Name="assignedIndividual_code" Type="Edm.String" MaxLength="20"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="LowCodeService.Incidents_DraftAdministrativeData" FromRole="Incidents" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="LowCodeService.Incidents_SiblingEntity" FromRole="Incidents" ToRole="Incidents1"/>
+            </EntityType>
+            <EntityType Name="Individual">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="LowCodeService.Individual_texts_1" FromRole="Individual" ToRole="Individual_texts"/>
+                <NavigationProperty Name="localized" Relationship="LowCodeService.Individual_localized" FromRole="Individual" ToRole="Individual_texts"/>
+            </EntityType>
+            <EntityType Name="Individual_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Priority">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="LowCodeService.Priority_texts_1" FromRole="Priority" ToRole="Priority_texts"/>
+                <NavigationProperty Name="localized" Relationship="LowCodeService.Priority_localized" FromRole="Priority" ToRole="Priority_texts"/>
+            </EntityType>
+            <EntityType Name="Priority_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Status">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="LowCodeService.Status_texts_1" FromRole="Status" ToRole="Status_texts"/>
+                <NavigationProperty Name="localized" Relationship="LowCodeService.Status_localized" FromRole="Status" ToRole="Status_texts"/>
+            </EntityType>
+            <EntityType Name="Status_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <Association Name="Category_texts_1">
+                <End Role="Category" Type="LowCodeService.Category" Multiplicity="*"/>
+                <End Role="Category_texts" Type="LowCodeService.Category_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="Category_localized">
+                <End Role="Category" Type="LowCodeService.Category" Multiplicity="*"/>
+                <End Role="Category_texts" Type="LowCodeService.Category_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Category_texts">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Category">
+                        <PropertyRef Name="code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Incidents_status">
+                <End Role="Incidents" Type="LowCodeService.Incidents" Multiplicity="*"/>
+                <End Role="Status" Type="LowCodeService.Status" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Status">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Incidents">
+                        <PropertyRef Name="status_code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Incidents_category">
+                <End Role="Incidents" Type="LowCodeService.Incidents" Multiplicity="*"/>
+                <End Role="Category" Type="LowCodeService.Category" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Category">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Incidents">
+                        <PropertyRef Name="category_code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Incidents_priority">
+                <End Role="Incidents" Type="LowCodeService.Incidents" Multiplicity="*"/>
+                <End Role="Priority" Type="LowCodeService.Priority" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Priority">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Incidents">
+                        <PropertyRef Name="priority_code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Incidents_assignedIndividual">
+                <End Role="Incidents" Type="LowCodeService.Incidents" Multiplicity="*"/>
+                <End Role="Individual" Type="LowCodeService.Individual" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Individual">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Incidents">
+                        <PropertyRef Name="assignedIndividual_code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Incidents_DraftAdministrativeData">
+                <End Role="Incidents" Type="LowCodeService.Incidents" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="LowCodeService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="Incidents">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Incidents_SiblingEntity">
+                <End Role="Incidents" Type="LowCodeService.Incidents" Multiplicity="*"/>
+                <End Role="Incidents1" Type="LowCodeService.Incidents" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="Individual_texts_1">
+                <End Role="Individual" Type="LowCodeService.Individual" Multiplicity="*"/>
+                <End Role="Individual_texts" Type="LowCodeService.Individual_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="Individual_localized">
+                <End Role="Individual" Type="LowCodeService.Individual" Multiplicity="*"/>
+                <End Role="Individual_texts" Type="LowCodeService.Individual_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Individual_texts">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Individual">
+                        <PropertyRef Name="code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Priority_texts_1">
+                <End Role="Priority" Type="LowCodeService.Priority" Multiplicity="*"/>
+                <End Role="Priority_texts" Type="LowCodeService.Priority_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="Priority_localized">
+                <End Role="Priority" Type="LowCodeService.Priority" Multiplicity="*"/>
+                <End Role="Priority_texts" Type="LowCodeService.Priority_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Priority_texts">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Priority">
+                        <PropertyRef Name="code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Status_texts_1">
+                <End Role="Status" Type="LowCodeService.Status" Multiplicity="*"/>
+                <End Role="Status_texts" Type="LowCodeService.Status_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="Status_localized">
+                <End Role="Status" Type="LowCodeService.Status" Multiplicity="*"/>
+                <End Role="Status_texts" Type="LowCodeService.Status_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Status_texts">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Status">
+                        <PropertyRef Name="code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="LowCodeService.Category" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Category/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Category/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Category/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Category"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Category_texts/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData/DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData/CreationDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData/CreatedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created By"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData/DraftIsCreatedByMe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData/LastChangeDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData/LastChangedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData/InProcessByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft In Process By"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.DraftAdministrativeData/DraftIsProcessedByMe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Incident Info"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+                                        <PropertyValue Property="Label" String="Details"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Main">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="description"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="lti"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="status_code"/>
+                                    <PropertyValue Property="Label" String="Status"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="location"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="category_code"/>
+                                    <PropertyValue Property="Label" String="Category"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="closed_on"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="priority_code"/>
+                                    <PropertyValue Property="Label" String="Priority"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="assignedIndividual_code"/>
+                                    <PropertyValue Property="Label" String="Assigned Individual"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="title"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Incident"/>
+                        <PropertyValue Property="TypeNamePlural" String="Incidents"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="description"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="assignedIndividual/name"/>
+                            <PropertyValue Property="Label" String="Assigned Individual"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="status/name"/>
+                            <PropertyValue Property="Label" String="Status"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="location"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="category/name"/>
+                            <PropertyValue Property="Label" String="Category"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>ID</PropertyPath>
+                        <PropertyPath>description</PropertyPath>
+                        <PropertyPath>lti</PropertyPath>
+                        <PropertyPath>status_code</PropertyPath>
+                        <PropertyPath>location</PropertyPath>
+                        <PropertyPath>category_code</PropertyPath>
+                        <PropertyPath>priority_code</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.EntityContainer/Incidents" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="LowCodeService.EntityContainer/Incidents_draftActivate"/>
+                        <PropertyValue Property="EditAction" String="LowCodeService.EntityContainer/Incidents_draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="LowCodeService.EntityContainer/Incidents_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/title" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Title"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/description" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/lti" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Lost time injury"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/location" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Location"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/category" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Category"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/priority" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Priority"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/closed_on" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Closed on"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/status_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Status"/>
+                <Annotation Term="Common.Text" Path="status/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Status"/>
+                        <PropertyValue Property="CollectionPath" String="Status"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="status_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/category_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Category"/>
+                <Annotation Term="Common.Text" Path="category/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Category"/>
+                        <PropertyValue Property="CollectionPath" String="Category"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="category_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/priority_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Priority"/>
+                <Annotation Term="Common.Text" Path="priority/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Priority"/>
+                        <PropertyValue Property="CollectionPath" String="Priority"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="priority_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/assignedIndividual_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="assignedIndividual/name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Individual"/>
+                        <PropertyValue Property="CollectionPath" String="Individual"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="assignedIndividual_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Incidents/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Individual" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Individual/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Individual/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Individual/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Individual"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Individual_texts/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Priority" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Priority/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Priority/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Priority/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Priority"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Priority_texts/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LowCodeService.Status/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Status/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Status/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="LowCodeService.Status_texts/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,9 @@
+---
+applications:
+  - name: low-code-srv
+    path: .
+    memory: 256M
+    buildpacks:
+      - nodejs_buildpack
+    services:
+      - ui_low_code-db

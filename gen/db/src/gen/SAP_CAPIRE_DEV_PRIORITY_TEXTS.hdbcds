@@ -1,0 +1,5 @@
+entity SAP_CAPIRE_DEV_PRIORITY_TEXTS {
+  key LOCALE : String(14);
+  DESCR : String(1000);
+  key CODE : String(20);
+};
