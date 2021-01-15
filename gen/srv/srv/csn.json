@@ -567,6 +567,33 @@
         }
       }
     },
+    "LowCodeService.Logs": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.capire.dev.Logs"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "date": {
+          "type": "cds.String",
+          "length": 100
+        },
+        "data": {
+          "type": "cds.String",
+          "length": 5000
+        }
+      },
+      "$syntax": "projection"
+    },
     "LowCodeService.Priority": {
       "kind": "entity",
       "@UI.Identification": [
@@ -2895,6 +2922,23 @@
           "key": true,
           "type": "cds.String",
           "length": 20
+        }
+      }
+    },
+    "sap.capire.dev.Logs": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "date": {
+          "type": "cds.String",
+          "length": 100
+        },
+        "data": {
+          "type": "cds.String",
+          "length": 5000
         }
       }
     },

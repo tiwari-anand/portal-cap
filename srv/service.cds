@@ -6,6 +6,7 @@ service LowCodeService {
     entity Category as projection on db.Category;
     entity Priority as projection on db.Priority;
     entity Individual as projection on db.Individual;
+    entity Logs as projection on db.Logs;
 }
 
 annotate LowCodeService.Incidents with @(

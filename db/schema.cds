@@ -27,3 +27,9 @@ entity Incidents {
     closed_on : Timestamp @title  : 'Closed on';
     assignedIndividual : Association to one Individual;
 }
+
+entity Logs{
+    key ID: UUID;
+    date :String(100);
+    data:String(5000);
+}
