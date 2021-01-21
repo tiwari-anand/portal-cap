@@ -4,5 +4,9 @@
 		"source": "^/v2/low-code/(.*)$",
 		"target": "$1",
 		"destination": "srv-api"
-	}]
+	},{
+        "source":"^/testService/(.*)$",
+        "target": "$1",
+		"destination": "srv-api"
+    }]
 }

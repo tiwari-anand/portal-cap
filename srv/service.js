@@ -24,13 +24,14 @@ module.exports = async srv => {
 
     srv.after('CREATE', 'Incidents', async (req) => {
 
-        const message = JSON.stringify(req.data);
+        const message = JSON.stringify(req);
 
         const topic = 'incident/created';
 
         myMessaging.emit(topic, message);
 
         //   return message
-        console.log("Successfully sent event")
+        
+        console.log(message +"Successfully sent event");
     })
 }

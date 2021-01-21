@@ -11,6 +11,7 @@ modules:
       - name: ui_low_code_html_repo_runtime
       - name: my_uaa
       - name: incident_portal
+      - name: workflow_mta
       - name: srv-api
         group: destinations
         properties:
@@ -26,6 +27,7 @@ modules:
     path: flp
     requires:
       - name: incident_portal
+      - name: workflow_mta
       - name: ui_low_code_html_repo_host
       - name: ui_low_code_ui_deployer
       - name: my_uaa
@@ -92,10 +94,11 @@ modules:
     requires:
       # 'hana' and 'xsuaa' resources extracted from CAP configuration
       - name: low-code-db
-  - name: incidentapprovalworkflow
+  - name: workflow
     type: com.sap.application.content
-    path: incidentapprovalworkflow
+    path: workflow
     requires:
+      - name: destService
       - name: workflow_mta
         parameters:
           content-target: true
@@ -127,10 +130,9 @@ resources:
   - name: ems
     type: org.cloudfoundry.existing-service
   - name: workflow_mta
-    parameters:
-      service-plan: standard
-      service: workflow
-    type: org.cloudfoundry.managed-service
+    type: org.cloudfoundry.existing-service
+  - name: destService
+    type: org.cloudfoundry.existing-service  
 
 # - name: srv-api
 #   properties:
