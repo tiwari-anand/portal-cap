@@ -28,3 +28,7 @@ $.context.product = product;
 
 
 $.context.request={"status_code":"2"};
+$.context.draftEnabled = "/v2/low-code/Incidents_draftEdit?PreserveChanges=true&ID=guid'"+$.context.ID+"'&IsActiveEntity=true";
+$.context.IncidentsDraftPatch = "/v2/low-code/Incidents(ID=guid'"+$.context.ID+"',IsActiveEntity=false)";
+$.context.IncidentDraftPrepare = "/v2/low-code/Incidents_draftPrepare?ID=guid'"+$.context.ID+"'&IsActiveEntity=false";
+$.context.IncidentsDraftUpdate = "/v2/low-code/Incidents_draftActivate?ID=guid'"+$.context.ID+"'&IsActiveEntity=false";
