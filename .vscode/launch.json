@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "pwa-chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "command": "cds run --with-mocks --in-memory?",
       "name": "cds run",
       "request": "launch",
@@ -12,6 +19,25 @@
       "skipFiles": [
         "<node_internals>/**"
       ]
+    },
+    {
+      "name": "portal-cap",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "run-script",
+        "start"
+      ],
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "windows": {
+        "runtimeExecutable": "npm.cmd"
+      },
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/portal-cap\"}"
+      }
     }
   ]
 }

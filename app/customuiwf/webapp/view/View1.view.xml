@@ -1,0 +1,32 @@
+<mvc:View controllerName="com.sap.customui.wf.customuiwf.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{contextModel>title}">
+					<content>
+                    <VBox>
+                     <HBox>
+                        <Label text="Assigned Person"/>
+                        <Text text="{contextModel>/assignedIndividual_code}"/>
+                     </HBox>
+                      <HBox>
+                        <Label text="Ctegory"/>
+                        <Text text="{contextModel>/category_code}"/>
+                     </HBox>
+                      <HBox>
+                        <Label text="Location"/>
+                        <Text text="{contextModel>/location}"/>
+                     </HBox>                                         
+                      <HBox>
+                        <Label text="Priority"/>
+                        <Text text="{contextModel>/priority_code}"/>
+                     </HBox>
+                    </VBox>
+                    <Button type="Accept" text="Accept" press="accept"></Button>                
+                    <Button type="Reject" text="Reject" press="reject"></Button>
+                    </content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

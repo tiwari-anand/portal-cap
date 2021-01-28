@@ -12,12 +12,15 @@
     "@sap/hana-client": "^2.4.177",
     "@sap/ui5-builder-webide-extension": "1.0.x",
     "@sap/xb-msg-amqp-v100": "latest",
+    "@sap/xsenv": "^3.1.0",
+    "@sap/xssec": "^3.0.10",
     "@sapui5/ts-types": "1.71.x",
     "@ui5/cli": "2.2.6",
     "await": "^0.2.6",
     "bestzip": "2.1.4",
     "eslint": "5.16.x",
     "express": "^4",
+    "passport": "^0.4.1",
     "rimraf": "3.0.2"
   },
   "devDependencies": {
@@ -51,6 +54,11 @@
       },
       "messaging": {
         "kind": "enterprise-messaging"
+      },
+      "auth": {
+        "passport": {
+          "strategy": "JWT"
+        }
       }
     }
   }

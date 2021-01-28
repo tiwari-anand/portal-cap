@@ -1,6 +1,6 @@
 using { sap.capire.dev as db } from '../db/schema';
 
-service LowCodeService {
+service LowCodeService @(requires:'admin') {
     entity Incidents as projection on db.Incidents;
     entity Status as projection on db.Status;
     entity Category as projection on db.Category;

@@ -1,145 +1,149 @@
 _schema-version: "3.2"
 ID: ui_low_code
 version: 0.0.1
-parameters:
-  enable-parallel-deployments: true
 modules:
-  - name: ui-low-code-approuter
-    type: approuter.nodejs
-    path: ui-low-code-approuter
-    requires:
-      - name: ui_low_code_html_repo_runtime
-      - name: my_uaa
-      - name: incident_portal
-      - name: workflow_mta
-      - name: srv-api
-        group: destinations
-        properties:
-          forwardAuthToken: true
-          name: srv-api
-          url: ~{url}
-
-    parameters:
-      disk-quota: 256M
-      memory: 256M
-  - name: flp
-    type: com.sap.portal.content
-    path: flp
-    requires:
-      - name: incident_portal
-      - name: workflow_mta
-      - name: ui_low_code_html_repo_host
-      - name: ui_low_code_ui_deployer
-      - name: my_uaa
-    parameters:
-      buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
-      memory: 128M
-      stack: cflinuxfs3
-  - name: comsapincidentshtmlapp
-    type: html5
-    path: htmlapp
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
-  - name: comsapincodentsproject1
-    type: html5
-    path: project1
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
+- name: ui-low-code-approuter
+  type: approuter.nodejs
+  path: ui-low-code-approuter
+  requires:
+  - name: ui_low_code_html_repo_runtime
+  - name: my_uaa
+  - name: incident_portal
+  - name: workflow_mta
+  - name: srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: srv-api
+      strictSSL: false
+      url: ~{url}
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: flp
+  type: com.sap.portal.content
+  path: flp
+  requires:
+  - name: incident_portal
+  - name: workflow_mta
+  - name: ui_low_code_html_repo_host
   - name: ui_low_code_ui_deployer
-    type: com.sap.application.content
-    path: deployer
-    requires:
-      - name: ui_low_code_html_repo_host
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources
-      requires:
-        - artifacts:
-            - comsapincodentsproject1.zip
-          name: comsapincodentsproject1
-          target-path: resources/
-
-  # --------------------- SERVER MODULE ------------------------
-  - name: low-code-srv
-    # ------------------------------------------------------------
-    type: nodejs
-    path: gen/srv
-    requires:
-      # Resources extracted from CAP configuration
-      - name: low-code-db
-      - name: ems
-    provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
-        properties:
-          url: ${default-url}/v2/low-code
-
-  #  -------------------- SIDECAR MODULE ------------------------
-  - name: low-code-db-deployer
-    # ------------------------------------------------------------
-    type: hdb
-    path: gen/db
+  - name: my_uaa
+  parameters:
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
+    memory: 128M
+    stack: cflinuxfs3
+- name: comsapincidentshtmlapp
+  type: html5
+  path: htmlapp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comsapincodentsproject1
+  type: html5
+  path: project1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: customuiwf
+  type: html5
+  path: app/customuiwf
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+    
+- name: ui_low_code_ui_deployer
+  type: com.sap.application.content
+  path: deployer
+  requires:
+  - name: my_uaa
+  - name: ui_low_code_html_repo_host
     parameters:
-      buildpack: nodejs_buildpack
+      content-target: true
+  build-parameters:
+    build-result: resources
     requires:
-      # 'hana' and 'xsuaa' resources extracted from CAP configuration
-      - name: low-code-db
-  - name: workflow
-    type: com.sap.application.content
-    path: workflow
-    requires:
-      - name: destService
-      - name: workflow_mta
-        parameters:
-          content-target: true
+    - artifacts:
+      - comsapincodentsproject1.zip
+      name: comsapincodentsproject1
+      target-path: resources/
+    - artifacts:
+      - customuiwf-content.zip
+      name: customuiwf
+      target-path: resources/
+- name: low-code-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: low-code-db
+  - name: ems
+  - name: my_uaa
+  provides:
+  - name: srv-api
+    properties:
+      url: ${default-url}/v2/low-code
+- name: low-code-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: low-code-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: workflow
+  type: com.sap.application.content
+  path: workflow
+  requires:
+  - name: destService
+  - name: workflow_mta
+    parameters:
+      content-target: true
 
 resources:
-  - name: ui_low_code_html_repo_runtime
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-runtime
-  - name: ui_low_code_html_repo_host
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-  - name: my_uaa
-    type: org.cloudfoundry.managed-service
-    parameters:
-      path: ./xs-security.json
-      service: xsuaa
-      service-plan: application
-  - name: incident_portal
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: portal
-      service-plan: standard
-  - name: low-code-db
-    type: org.cloudfoundry.existing-service
-  - name: ems
-    type: org.cloudfoundry.existing-service
-  - name: workflow_mta
-    type: org.cloudfoundry.existing-service
-  - name: destService
-    type: org.cloudfoundry.existing-service  
+- name: ui_low_code_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: ui_low_code_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: my_uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+- name: incident_portal
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: portal
+    service-plan: standard
+- name: low-code-db
+  type: org.cloudfoundry.existing-service
+- name: ems
+  type: org.cloudfoundry.existing-service
+- name: workflow_mta
+  type: org.cloudfoundry.existing-service
+- name: destService
+  type: org.cloudfoundry.existing-service
 
-# - name: srv-api
-#   properties:
-#     url: https://low-code-srv.cfapps.eu10.hana.ondemand.com/v2/low-code
+parameters:
+  enable-parallel-deployments: true
 build-parameters:
   before-all:
-    - builder: custom
-      commands:
-        - npm install --production
-        - npx -p @sap/cds-dk cds build --production
+  - builder: custom
+    commands:
+    - npm install --production
+    - npx -p @sap/cds-dk cds build --production

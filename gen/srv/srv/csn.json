@@ -45,7 +45,8 @@
     },
     "LowCodeService": {
       "@source": "srv/service.cds",
-      "kind": "service"
+      "kind": "service",
+      "@requires": "admin"
     },
     "LowCodeService.Category": {
       "kind": "entity",

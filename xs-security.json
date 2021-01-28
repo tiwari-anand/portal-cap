@@ -1,6 +1,7 @@
 {
-  "xsappname": "icnidents",
+  "xsappname": "portal-cap",
   "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
   "scopes": [
     {
       "name": "uaa.user",
