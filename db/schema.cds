@@ -6,7 +6,9 @@ entity IncidentsCodeList : sap.common.CodeList {
  name : String;
 }
 
-entity Status: IncidentsCodeList{}
+entity Status: IncidentsCodeList{
+    key code: String default '1';
+}
 
 entity Category: IncidentsCodeList{}
 

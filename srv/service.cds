@@ -38,16 +38,16 @@ Facets: [
 ],
 FieldGroup#Main: {
 Data: [
-{ Value: ID },
+//{ Value: ID },
 { Value: title },
 { Value: description },
 { Value: lti },
-{ Value: status_code , Label:'Status'},
+//{ Value: status_code , Label:'Status'},
 { Value: location },
 { Value: category_code, Label:'Category' },
-{ Value: closed_on  },
+//{ Value: closed_on  },
 { Value: priority_code, Label:'Priority'},
-{ Value: assignedIndividual_code ,Label:'Assigned Individual'}
+//{ Value: assignedIndividual_code ,Label:'Assigned Individual'}
 ]
 }
 }

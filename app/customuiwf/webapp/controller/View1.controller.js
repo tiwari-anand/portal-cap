@@ -25,11 +25,23 @@ sap.ui.define([
                 var dratePrepare = "/v2/low-code/Incidents_draftPrepare?ID=guid'" + id + "'&IsActiveEntity=false";
 
                 var draftActivate = "/v2/low-code/Incidents_draftActivate?ID=guid'" + id + "'&IsActiveEntity=false";
-                this.callPost(id, draftEdit);
-                that.callPostBody(id, draftPatch, { "status_code": "2" });
-                that.callPost(id, dratePrepare);
-                that.callPost(id, draftActivate);
-                var token = that._fetchToken();
+                
+                var url ="/v2/low-code/";
+                var token = that._fetchToken(url);
+                this.callPost(id, draftEdit,token);
+
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date+' '+time;
+                console.log(dateTime);
+
+                that.callPostBody(id, draftPatch, { "status_code":"2"},token);
+                that.callPost(id, dratePrepare,token);
+                that.callPost(id, draftActivate, token);
+
+                url = "/bpmworkflowruntime/v1/xsrf-token";
+                token = that._fetchToken(url);
                 jQuery.ajax({
                     url: "/bpmworkflowruntime/v1/task-instances/" + that.getOwnerComponent().getModel("taskModel").getData().taskId,
                     method: "PATCH",
@@ -41,10 +53,10 @@ sap.ui.define([
                     }
                 });
 
-
+                
             },
 
-            callPost: function (id, url) {
+            callPost: function (id, url,token) {
                 // @ts-ignore
                 return new Promise(function (resolve, reject) {
                     // @ts-ignore
@@ -52,6 +64,7 @@ sap.ui.define([
                         "url": url,
                         "headers": {
                             "content-type": "application/json",
+                            "X-CSRF-Token": token
                         },
                         "type": "POST",
                         async: false,
@@ -65,16 +78,18 @@ sap.ui.define([
                 });
             },
 
-            callPostBody: function (id, url, body) {
+            callPostBody: function (id, url, body,token) {
                 // @ts-ignore
                 return new Promise(function (resolve, reject) {
+                    console.log("Body is ",body);
                     // @ts-ignore
                     jQuery.ajax({
                         "url": url,
-                        "body": body,
-                        "dataType": 'json',
+                        "data": JSON.stringify(body),
+                        "datatype": JSON,
                         "headers": {
                             "content-type": "application/json",
+                            "X-CSRF-Token": token
                         },
                         "type": "PATCH",
                         async: false,
@@ -88,10 +103,10 @@ sap.ui.define([
                 });
             },
 
-            _fetchToken: function () {
+            _fetchToken: function (url) {
                 var token;
                 jQuery.ajax({
-                    url: "/bpmworkflowruntime/v1/xsrf-token",
+                    url: url,
                     method: "GET",
                     async: false,
                     headers: {

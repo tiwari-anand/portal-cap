@@ -17,7 +17,7 @@
 			},
 			"activities": {
 				"95395416-6856-4862-84cd-3e1eacf4fd82": {
-					"name": "Approve Incident"
+					"name": "Incident"
 				}
 			},
 			"sequenceFlows": {
@@ -51,7 +51,7 @@
 			"recipientUsers": "${context.users}",
 			"userInterfaceParams": [],
 			"id": "usertask1",
-			"name": "Approve Incident"
+			"name": "Incident"
 		},
 		"c6b99f32-5fe6-4ab6-b60a-80fba1b9ae0f": {
 			"classDefinition": "com.sap.bpm.wfs.SequenceFlow",
@@ -59,6 +59,13 @@
 			"name": "SequenceFlow1",
 			"sourceRef": "11a9b5ee-17c0-4159-9bbf-454dcfdcd5c3",
 			"targetRef": "95395416-6856-4862-84cd-3e1eacf4fd82"
+		},
+		"853d9fd5-0d83-46fe-9d0c-9bb2c92a9868": {
+			"classDefinition": "com.sap.bpm.wfs.SequenceFlow",
+			"id": "sequenceflow12",
+			"name": "SequenceFlow12",
+			"sourceRef": "95395416-6856-4862-84cd-3e1eacf4fd82",
+			"targetRef": "2798f4e7-bc42-4fad-a248-159095a2f40a"
 		},
 		"42fa7a2d-c526-4a02-b3ba-49b5168ba644": {
 			"classDefinition": "com.sap.bpm.wfs.ui.Diagram",
@@ -101,6 +108,13 @@
 			"height": 60,
 			"object": "95395416-6856-4862-84cd-3e1eacf4fd82"
 		},
+		"52fd0ba4-9a28-4280-b241-7c7aef6deea8": {
+			"classDefinition": "com.sap.bpm.wfs.ui.SequenceFlowSymbol",
+			"points": "403,122 547,122",
+			"sourceSymbol": "2216d146-6f5b-40e9-8f48-64acfa5d1315",
+			"targetSymbol": "53e54950-7757-4161-82c9-afa7e86cff2c",
+			"object": "853d9fd5-0d83-46fe-9d0c-9bb2c92a9868"
+		},
 		"62d7f4ed-4063-4c44-af8b-39050bd44926": {
 			"classDefinition": "com.sap.bpm.wfs.LastIDs",
 			"sequenceflow": 12,
@@ -110,20 +124,6 @@
 			"servicetask": 4,
 			"scripttask": 1,
 			"exclusivegateway": 1
-		},
-		"853d9fd5-0d83-46fe-9d0c-9bb2c92a9868": {
-			"classDefinition": "com.sap.bpm.wfs.SequenceFlow",
-			"id": "sequenceflow12",
-			"name": "SequenceFlow12",
-			"sourceRef": "95395416-6856-4862-84cd-3e1eacf4fd82",
-			"targetRef": "2798f4e7-bc42-4fad-a248-159095a2f40a"
-		},
-		"52fd0ba4-9a28-4280-b241-7c7aef6deea8": {
-			"classDefinition": "com.sap.bpm.wfs.ui.SequenceFlowSymbol",
-			"points": "403,122 547,122",
-			"sourceSymbol": "2216d146-6f5b-40e9-8f48-64acfa5d1315",
-			"targetSymbol": "53e54950-7757-4161-82c9-afa7e86cff2c",
-			"object": "853d9fd5-0d83-46fe-9d0c-9bb2c92a9868"
 		}
 	}
 }

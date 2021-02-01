@@ -201,11 +201,6 @@
       "@UI.FieldGroup#Main.Data": [
         {
           "Value": {
-            "=": "ID"
-          }
-        },
-        {
-          "Value": {
             "=": "title"
           }
         },
@@ -221,12 +216,6 @@
         },
         {
           "Value": {
-            "=": "status_code"
-          },
-          "Label": "Status"
-        },
-        {
-          "Value": {
             "=": "location"
           }
         },
@@ -238,20 +227,9 @@
         },
         {
           "Value": {
-            "=": "closed_on"
-          }
-        },
-        {
-          "Value": {
             "=": "priority_code"
           },
           "Label": "Priority"
-        },
-        {
-          "Value": {
-            "=": "assignedIndividual_code"
-          },
-          "Label": "Assigned Individual"
         }
       ],
       "@UI.HeaderInfo.Description.Value": {
@@ -757,6 +735,10 @@
           "type": "cds.String",
           "length": 1000
         },
+        "name": {
+          "@title": "Status",
+          "type": "cds.String"
+        },
         "code": {
           "@Common.Text": {
             "=": "name"
@@ -767,11 +749,9 @@
           "@UI.Hidden": true,
           "key": true,
           "type": "cds.String",
-          "length": 20
-        },
-        "name": {
-          "@title": "Status",
-          "type": "cds.String"
+          "default": {
+            "val": "1"
+          }
         },
         "texts": {
           "type": "cds.Composition",
@@ -859,7 +839,9 @@
           "@odata.containment.ignore": true,
           "key": true,
           "type": "cds.String",
-          "length": 20
+          "default": {
+            "val": "1"
+          }
         }
       }
     },
@@ -1280,13 +1262,15 @@
           "type": "cds.String",
           "length": 1000
         },
+        "name": {
+          "type": "cds.String"
+        },
         "code": {
           "key": true,
           "type": "cds.String",
-          "length": 20
-        },
-        "name": {
-          "type": "cds.String"
+          "default": {
+            "val": "1"
+          }
         },
         "texts": {
           "type": "cds.Composition",
@@ -1955,13 +1939,15 @@
           "type": "cds.String",
           "length": 1000
         },
+        "name": {
+          "type": "cds.String"
+        },
         "code": {
           "key": true,
           "type": "cds.String",
-          "length": 20
-        },
-        "name": {
-          "type": "cds.String"
+          "default": {
+            "val": "1"
+          }
         },
         "texts": {
           "type": "cds.Composition",
@@ -3074,13 +3060,15 @@
           "type": "cds.String",
           "length": 1000
         },
+        "name": {
+          "type": "cds.String"
+        },
         "code": {
           "key": true,
           "type": "cds.String",
-          "length": 20
-        },
-        "name": {
-          "type": "cds.String"
+          "default": {
+            "val": "1"
+          }
         },
         "texts": {
           "type": "cds.Composition",
@@ -3157,7 +3145,9 @@
           "@odata.containment.ignore": true,
           "key": true,
           "type": "cds.String",
-          "length": 20
+          "default": {
+            "val": "1"
+          }
         }
       }
     },
