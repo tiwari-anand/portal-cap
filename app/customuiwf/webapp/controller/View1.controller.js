@@ -31,12 +31,13 @@ sap.ui.define([
                 this.callPost(id, draftEdit,token);
 
                 var today = new Date();
-                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                var dateTime = date+' '+time;
+                var date = today.toISOString().slice(0, 10)
+                //var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = String(today.getHours()).padStart(2,'0') + ":" + String(today.getMinutes()).padStart(2,'0') + ":" + String(today.getSeconds()).padStart(2,'0');
+                var dateTime = date+'T'+time+'.00Z';
                 console.log(dateTime);
 
-                that.callPostBody(id, draftPatch, { "status_code":"2"},token);
+                that.callPostBody(id, draftPatch, { "status_code":"2", "closed_on":dateTime},token);
                 that.callPost(id, dratePrepare,token);
                 that.callPost(id, draftActivate, token);
 
@@ -53,7 +54,6 @@ sap.ui.define([
                     }
                 });
 
-                
             },
 
             callPost: function (id, url,token) {
