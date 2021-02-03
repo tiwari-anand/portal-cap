@@ -8,5 +8,7 @@ default-env.json
 
 # auto generated wildcard
 dbsac/.env
+dbsac/node_modules
 # auto generated wildcard
 low-code-dbroles/.env
+low-code-dbroles/node_modules
