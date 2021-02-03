@@ -2,7 +2,7 @@ namespace sap.capire.dev;
 using { sap } from '@sap/cds/common';
 
 entity IncidentsCodeList : sap.common.CodeList {
- key code : String(20);
+ key code : String;
  name : String;
 }
 

@@ -37,7 +37,7 @@ sap.ui.define([
                 //var dateTime = date+'T'+time+'.00Z';
                 console.log(date);
 
-                that.callPostBody(id, draftPatch, { "status_code":"2", "closed_on":date},token);
+                that.callPostBody(id, draftPatch, { "status_code":"RESOLVED", "closed_on":date},token);
                 that.callPost(id, dratePrepare,token);
                 that.callPost(id, draftActivate, token);
 

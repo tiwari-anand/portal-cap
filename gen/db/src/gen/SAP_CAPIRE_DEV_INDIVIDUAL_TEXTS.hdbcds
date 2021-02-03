@@ -1,5 +1,5 @@
 entity SAP_CAPIRE_DEV_INDIVIDUAL_TEXTS {
   key LOCALE : String(14);
   DESCR : String(1000);
-  key CODE : String(20);
+  key CODE : String(5000);
 };
