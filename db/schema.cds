@@ -7,7 +7,7 @@ entity IncidentsCodeList : sap.common.CodeList {
 }
 
 entity Status: IncidentsCodeList{
-    key code: String default '1';
+    key code: String default 'OPEN';
 }
 
 entity Category: IncidentsCodeList{}
@@ -26,7 +26,8 @@ entity Incidents {
     location :  String @title  : 'Location';
     category : Association to Category  @title  : 'Category';
     priority : Association to Priority @title  : 'Priority';
-    closed_on : Timestamp @title  : 'Closed on';
+    closed_on : String @title  : 'Closed on';
+    open_on : String @title  : 'Open on';
     assignedIndividual : Association to one Individual;
 }
 

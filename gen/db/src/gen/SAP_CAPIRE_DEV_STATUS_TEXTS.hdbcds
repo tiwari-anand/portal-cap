@@ -1,5 +1,5 @@
 entity SAP_CAPIRE_DEV_STATUS_TEXTS {
   key LOCALE : String(14);
   DESCR : String(1000);
-  key CODE : String(5000) default '1';
+  key CODE : String(5000) default 'OPEN';
 };
