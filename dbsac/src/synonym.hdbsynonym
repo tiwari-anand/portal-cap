@@ -1,0 +1,8 @@
+{
+  "incidents": {
+    "target": {
+      "object": "SAP_CAPIRE_DEV_INCIDENTS",
+      "schema": "C12409E37A8B45C1A390C2EFC01D0C80"
+    }
+  }
+}

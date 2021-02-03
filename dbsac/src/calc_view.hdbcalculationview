@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="calc_view" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="calc_view.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="incidents">
+    <resourceUri>incidents</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="incidents">
+  <attributes>
+    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="incidents" columnName="ID"/>
+    </attribute>
+    <attribute id="TITLE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TITLE"/>
+      <keyMapping columnObjectName="incidents" columnName="TITLE"/>
+    </attribute>
+    <attribute id="DESCRIPTION" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DESCRIPTION"/>
+      <keyMapping columnObjectName="incidents" columnName="DESCRIPTION"/>
+    </attribute>
+    <attribute id="LTI" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LTI"/>
+      <keyMapping columnObjectName="incidents" columnName="LTI"/>
+    </attribute>
+    <attribute id="LOCATION" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LOCATION"/>
+      <keyMapping columnObjectName="incidents" columnName="LOCATION"/>
+    </attribute>
+    <attribute id="CLOSED_ON" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CLOSED_ON"/>
+      <keyMapping columnObjectName="incidents" columnName="CLOSED_ON"/>
+    </attribute>
+    <attribute id="OPEN_ON" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="OPEN_ON"/>
+      <keyMapping columnObjectName="incidents" columnName="OPEN_ON"/>
+    </attribute>
+    <attribute id="STATUS_CODE" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATUS_CODE"/>
+      <keyMapping columnObjectName="incidents" columnName="STATUS_CODE"/>
+    </attribute>
+    <attribute id="CATEGORY_CODE" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CATEGORY_CODE"/>
+      <keyMapping columnObjectName="incidents" columnName="CATEGORY_CODE"/>
+    </attribute>
+    <attribute id="PRIORITY_CODE" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRIORITY_CODE"/>
+      <keyMapping columnObjectName="incidents" columnName="PRIORITY_CODE"/>
+    </attribute>
+    <attribute id="ASSIGNEDINDIVIDUAL_CODE" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ASSIGNEDINDIVIDUAL_CODE"/>
+      <keyMapping columnObjectName="incidents" columnName="ASSIGNEDINDIVIDUAL_CODE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="COUNT_1" order="12" aggregationType="sum" measureType="simple" calculatedMeasureType="counter" aggregatable="true" datatype="BIGINT" length="">
+      <exceptionAggregation>
+        <attribute attributeName="ID"/>
+      </exceptionAggregation>
+      <formula>1</formula>
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

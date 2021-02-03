@@ -85,8 +85,7 @@
           },
           "@UI.Hidden": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "@title": "Category",
@@ -177,8 +176,7 @@
         "code": {
           "@odata.containment.ignore": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         }
       }
     },
@@ -201,11 +199,6 @@
       "@UI.FieldGroup#Main.Data": [
         {
           "Value": {
-            "=": "ID"
-          }
-        },
-        {
-          "Value": {
             "=": "title"
           }
         },
@@ -221,12 +214,6 @@
         },
         {
           "Value": {
-            "=": "status_code"
-          },
-          "Label": "Status"
-        },
-        {
-          "Value": {
             "=": "location"
           }
         },
@@ -238,20 +225,9 @@
         },
         {
           "Value": {
-            "=": "closed_on"
-          }
-        },
-        {
-          "Value": {
             "=": "priority_code"
           },
           "Label": "Priority"
-        },
-        {
-          "Value": {
-            "=": "assignedIndividual_code"
-          },
-          "Label": "Assigned Individual"
         }
       ],
       "@UI.HeaderInfo.Description.Value": {
@@ -408,7 +384,11 @@
         },
         "closed_on": {
           "@title": "Closed on",
-          "type": "cds.Timestamp"
+          "type": "cds.String"
+        },
+        "open_on": {
+          "@title": "Open on",
+          "type": "cds.String"
         },
         "assignedIndividual": {
           "@Common.Text": {
@@ -471,8 +451,7 @@
           },
           "@UI.Hidden": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "@title": "Individual",
@@ -563,8 +542,7 @@
         "code": {
           "@odata.containment.ignore": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         }
       }
     },
@@ -632,8 +610,7 @@
           },
           "@UI.Hidden": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "@title": "Priority",
@@ -724,8 +701,7 @@
         "code": {
           "@odata.containment.ignore": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         }
       }
     },
@@ -757,6 +733,10 @@
           "type": "cds.String",
           "length": 1000
         },
+        "name": {
+          "@title": "Status",
+          "type": "cds.String"
+        },
         "code": {
           "@Common.Text": {
             "=": "name"
@@ -767,11 +747,9 @@
           "@UI.Hidden": true,
           "key": true,
           "type": "cds.String",
-          "length": 20
-        },
-        "name": {
-          "@title": "Status",
-          "type": "cds.String"
+          "default": {
+            "val": "OPEN"
+          }
         },
         "texts": {
           "type": "cds.Composition",
@@ -859,7 +837,9 @@
           "@odata.containment.ignore": true,
           "key": true,
           "type": "cds.String",
-          "length": 20
+          "default": {
+            "val": "OPEN"
+          }
         }
       }
     },
@@ -912,8 +892,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -1046,7 +1025,11 @@
         },
         "closed_on": {
           "@title": "Closed on",
-          "type": "cds.Timestamp"
+          "type": "cds.String"
+        },
+        "open_on": {
+          "@title": "Open on",
+          "type": "cds.String"
         },
         "assignedIndividual": {
           "type": "cds.Association",
@@ -1096,8 +1079,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -1189,8 +1171,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -1280,13 +1261,15 @@
           "type": "cds.String",
           "length": 1000
         },
+        "name": {
+          "type": "cds.String"
+        },
         "code": {
           "key": true,
           "type": "cds.String",
-          "length": 20
-        },
-        "name": {
-          "type": "cds.String"
+          "default": {
+            "val": "OPEN"
+          }
         },
         "texts": {
           "type": "cds.Composition",
@@ -1398,8 +1381,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -1536,7 +1518,11 @@
         },
         "closed_on": {
           "@title": "Closed on",
-          "type": "cds.Timestamp"
+          "type": "cds.String"
+        },
+        "open_on": {
+          "@title": "Open on",
+          "type": "cds.String"
         },
         "assignedIndividual": {
           "type": "cds.Association",
@@ -1609,8 +1595,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -1725,8 +1710,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -1841,8 +1825,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -1955,13 +1938,15 @@
           "type": "cds.String",
           "length": 1000
         },
+        "name": {
+          "type": "cds.String"
+        },
         "code": {
           "key": true,
           "type": "cds.String",
-          "length": 20
-        },
-        "name": {
-          "type": "cds.String"
+          "default": {
+            "val": "OPEN"
+          }
         },
         "texts": {
           "type": "cds.Composition",
@@ -2542,8 +2527,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -2622,8 +2606,7 @@
         "code": {
           "@odata.containment.ignore": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         }
       }
     },
@@ -2690,7 +2673,11 @@
         },
         "closed_on": {
           "@title": "Closed on",
-          "type": "cds.Timestamp"
+          "type": "cds.String"
+        },
+        "open_on": {
+          "@title": "Open on",
+          "type": "cds.String"
         },
         "assignedIndividual": {
           "type": "cds.Association",
@@ -2732,8 +2719,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -2812,8 +2798,7 @@
         "code": {
           "@odata.containment.ignore": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         }
       }
     },
@@ -2841,8 +2826,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -2921,8 +2905,7 @@
         "code": {
           "@odata.containment.ignore": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         }
       }
     },
@@ -2967,8 +2950,7 @@
         },
         "code": {
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         },
         "name": {
           "type": "cds.String"
@@ -3047,8 +3029,7 @@
         "code": {
           "@odata.containment.ignore": true,
           "key": true,
-          "type": "cds.String",
-          "length": 20
+          "type": "cds.String"
         }
       }
     },
@@ -3074,13 +3055,15 @@
           "type": "cds.String",
           "length": 1000
         },
+        "name": {
+          "type": "cds.String"
+        },
         "code": {
           "key": true,
           "type": "cds.String",
-          "length": 20
-        },
-        "name": {
-          "type": "cds.String"
+          "default": {
+            "val": "OPEN"
+          }
         },
         "texts": {
           "type": "cds.Composition",
@@ -3157,7 +3140,9 @@
           "@odata.containment.ignore": true,
           "key": true,
           "type": "cds.String",
-          "length": 20
+          "default": {
+            "val": "OPEN"
+          }
         }
       }
     },

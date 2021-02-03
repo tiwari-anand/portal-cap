@@ -2,11 +2,13 @@ namespace sap.capire.dev;
 using { sap } from '@sap/cds/common';
 
 entity IncidentsCodeList : sap.common.CodeList {
- key code : String(20);
+ key code : String;
  name : String;
 }
 
-entity Status: IncidentsCodeList{}
+entity Status: IncidentsCodeList{
+    key code: String default 'OPEN';
+}
 
 entity Category: IncidentsCodeList{}
 
@@ -24,7 +26,8 @@ entity Incidents {
     location :  String @title  : 'Location';
     category : Association to Category  @title  : 'Category';
     priority : Association to Priority @title  : 'Priority';
-    closed_on : Timestamp @title  : 'Closed on';
+    closed_on : String @title  : 'Closed on';
+    open_on : String @title  : 'Open on';
     assignedIndividual : Association to one Individual;
 }
 
