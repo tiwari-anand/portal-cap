@@ -61,7 +61,6 @@ modules:
     commands:
     - npm run build
     supported-platforms: []
-    
 - name: ui_low_code_ui_deployer
   type: com.sap.application.content
   path: deployer
@@ -107,7 +106,27 @@ modules:
   - name: workflow_mta
     parameters:
       content-target: true
+      
+- name: low-code-dbroles
+  type: hdb  
+  path: low-code-dbroles
+  parameters:
+   buildpack: nodejs_buildpack
+  requires:
+  - name: low-code-db
 
+- name: dbsac_module
+  type: hdb
+  path: dbsac
+  parameters:
+    buildpack: nodejs_buildpack
+  requires:
+  - name: dbsac
+  - name: low-code-db
+    group: SERVICE_REPLACEMENTS
+    properties:
+      TARGET_CONTAINER: low-code-db
+ 
 resources:
 - name: ui_low_code_html_repo_runtime
   type: org.cloudfoundry.managed-service
@@ -138,7 +157,14 @@ resources:
   type: org.cloudfoundry.existing-service
 - name: destService
   type: org.cloudfoundry.existing-service
-
+- name: dbsac
+  type: org.cloudfoundry.existing-service
+- name: cross-container-service-1
+  type: org.cloudfoundry.existing-service
+  parameters:
+    service-name: dbsac
+  properties:
+    the-service-name: ${service-name}
 parameters:
   enable-parallel-deployments: true
 build-parameters:

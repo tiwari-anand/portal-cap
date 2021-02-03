@@ -1,0 +1,7 @@
+{
+  "incidents": {
+    "target": {
+      "object": "SAP_CAPIRE_DEV_INCIDENTS"
+    }
+  }
+}

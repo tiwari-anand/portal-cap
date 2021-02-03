@@ -1,0 +1,14 @@
+{
+  "role": {
+    "name": "myapphana.db::external_access",
+    "object_privileges": [
+      {
+        "name": "incidents",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      }
+    ]
+  }
+}

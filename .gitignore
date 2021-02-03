@@ -5,3 +5,8 @@
 
 # added by cds deploy
 default-env.json
+
+# auto generated wildcard
+dbsac/.env
+# auto generated wildcard
+low-code-dbroles/.env
