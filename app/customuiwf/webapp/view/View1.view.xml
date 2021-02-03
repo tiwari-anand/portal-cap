@@ -1,7 +1,7 @@
 <mvc:View controllerName="com.sap.customui.wf.customuiwf.controller.View1"
 	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
 	xmlns="sap.m">
-	<Shell id="shell">
+	<!-- <Shell id="shell"> -->
 		<App id="app">
 			<pages>
 				<Page id="page" title="{contextModel>/title}">
@@ -30,5 +30,5 @@
 				</Page>
 			</pages>
 		</App>
-	</Shell>
+	<!-- </Shell> -->
 </mvc:View>
