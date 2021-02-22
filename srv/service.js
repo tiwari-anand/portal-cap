@@ -21,6 +21,11 @@ module.exports = async srv => {
 
     const myMessaging = await cds.connect.to("messaging");
 
+    srv.before('CREATE', 'Incidents', async (req) => {
+        var curr_date = new Date().toISOString().slice(0, 10);
+        req.data.open_on = curr_date;
+    });
+
 
     srv.after('CREATE', 'Incidents', async (req) => {
 
@@ -33,5 +38,5 @@ module.exports = async srv => {
         //   return message
         
         console.log(message +"Successfully sent event");
-    })
+    });
 }

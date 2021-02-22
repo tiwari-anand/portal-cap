@@ -61,12 +61,28 @@
       <keyCalculation datatype="DATE" expressionLanguage="SQL">
         <formula>TO_DATE(&quot;OPEN_ON&quot;)</formula>
       </keyCalculation>
-      </calculatedAttribute>
+    </calculatedAttribute>
     <calculatedAttribute id="closed_on_date" order="14" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
       <keyCalculation datatype="DATE" expressionLanguage="SQL">
         <formula>TO_DATE(&quot;CLOSED_ON&quot;)</formula>
       </keyCalculation>
-      </calculatedAttribute>
+    </calculatedAttribute>
+  
+    <calculatedAttribute id="year_open_on" order="15" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="INTEGER" expressionLanguage="SQL">
+        <formula>YEAR(&quot;date_open_on&quot;)</formula>
+      </keyCalculation>
+    </calculatedAttribute>
+    <calculatedAttribute id="month_open_on" order="16" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="INTEGER" expressionLanguage="SQL">
+        <formula>MONTH(&quot;date_open_on&quot;)</formula>
+      </keyCalculation>
+    </calculatedAttribute>
+    <calculatedAttribute id="day_open_on" order="17" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="INTEGER" expressionLanguage="SQL">
+        <formula>extract_day(&quot;date_open_on&quot;)</formula>
+      </keyCalculation>
+    </calculatedAttribute>
   </calculatedAttributes>
   <baseMeasures/>
   <calculatedMeasures>
@@ -81,15 +97,17 @@
   <restrictedMeasures/>
   <localDimensions>
     <localDimension id="timehierchy">
-      <attributeRef xsi:type="DataFoundation:Attribute">OPEN_ON</attributeRef>
-      <attributeRef xsi:type="DataFoundation:Attribute">CLOSED_ON</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">year_open_on</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">month_open_on</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">day_open_on</attributeRef>
       <hierarchies>
         <hierarchy xsi:type="Dimension:LeveledHierarchy" id="timehierchy" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_PATH_ENFORCED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="true">
           <descriptions defaultDescription="timehierchy"/>
           <unassignedMemberProperties mode="FALSE"/>
           <levels>
-            <level levelAttribute="OPEN_ON" levelType="MDLEVEL_TYPE_TIME" order="1" orderAttribute="OPEN_ON" sortDirection="ASC"/>
-            <level levelAttribute="CLOSED_ON" levelType="MDLEVEL_TYPE_TIME" order="2" orderAttribute="CLOSED_ON" sortDirection="ASC"/>
+            <level levelAttribute="year_open_on" levelType="MDLEVEL_TYPE_TIME_YEARS" order="1" orderAttribute="year_open_on" sortDirection="ASC"/>
+            <level levelAttribute="month_open_on" levelType="MDLEVEL_TYPE_TIME_MONTHS" order="2" orderAttribute="month_open_on" sortDirection="ASC"/>
+            <level levelAttribute="day_open_on" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="day_open_on" sortDirection="ASC"/>
           </levels>
         </hierarchy>
       </hierarchies>
