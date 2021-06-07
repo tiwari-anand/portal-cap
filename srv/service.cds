@@ -22,7 +22,7 @@ LineItem: [
 // { Value: ID },
 // { Value: title },
 { Value: description },
-{ Value: assignedIndividual.name, Label:'Assigned Individual' },
+//{ Value: assignedIndividual.name, Label:'Assigned Individual' },
 { Value: status.name ,Label:'Status'},
 { Value: location },
 { Value: category.name, Label:'Category' }

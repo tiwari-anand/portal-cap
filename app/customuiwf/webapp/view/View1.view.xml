@@ -8,8 +8,8 @@
 					<content>
 						<VBox class="sapUiSmallMargin">
                             <HBox class="sapUiTinyMarginBottom">
-                                <Label text="Assigned Person :"/>
-                                <Text text="{contextModel>/assignedIndividual_code}"/>
+                                <Label text="Description :"/>
+                                <Text text="{contextModel>/description}"/>
                             </HBox>
                             <HBox class="sapUiTinyMarginBottom">
                                 <Label text="Category :"/>
