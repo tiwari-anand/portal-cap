@@ -17,6 +17,13 @@ modules:
       name: srv-api
       strictSSL: false
       url: ~{url}
+  - name: mailer-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: mailer-api
+      strictSSL: false
+      url: ~{url}
   parameters:
     disk-quota: 256M
     memory: 256M
@@ -91,6 +98,15 @@ modules:
   - name: srv-api
     properties:
       url: ${default-url}/v2/low-code
+- name: mail-srv
+  type: nodejs
+  path: mailService/MailerService
+  provides:
+  - name: mailer-api
+    properties:
+      url: ${default-url}
+  parameters:
+    memory: 128M
 - name: low-code-db-deployer
   type: hdb
   path: gen/db

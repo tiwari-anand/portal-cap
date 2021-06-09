@@ -1,0 +1,5 @@
+---
+applications:
+- name: MailService
+  path: MailService
+  memory: 128M

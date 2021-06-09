@@ -7,6 +7,10 @@ service LowCodeService @(requires:'admin') {
     entity Priority as projection on db.Priority;
     entity Individual as projection on db.Individual;
     entity Logs as projection on db.Logs;
+    entity Service as projection on db.Service;
+    entity Performance as projection on db.Performance;
+    entity ResolutionTime as projection on db.ResolutionTime;
+    entity Feedback as projection on db.Feedback;
 }
 
 annotate LowCodeService.Incidents with @(

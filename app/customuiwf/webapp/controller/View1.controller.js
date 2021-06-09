@@ -56,6 +56,25 @@ sap.ui.define([
 
             },
 
+            reject: function(){
+                var url = "/mailService/";
+                jQuery.ajax({
+                        "url": url,
+                        "data":"{\"email\": \"@gmail.com\"}",
+                        "headers": {
+                            "content-type": "application/json"
+                        },
+                        "type": "POST",
+                        async: false,
+                        success: function (r) {
+                            console.log("Message sent Successfully");
+
+                        }, error: function (e) {
+                            console.log(e);
+                        }
+                    });
+            },
+
             callPost: function (id, url,token) {
                 // @ts-ignore
                 return new Promise(function (resolve, reject) {

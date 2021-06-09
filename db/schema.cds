@@ -16,6 +16,12 @@ entity Priority : IncidentsCodeList {}
 
 entity Individual: IncidentsCodeList{}
 
+entity Service: IncidentsCodeList{}
+
+entity Performance: IncidentsCodeList{}
+
+entity ResolutionTime: IncidentsCodeList{}
+
 
 entity Incidents {
     key ID : UUID;
@@ -29,6 +35,16 @@ entity Incidents {
     closed_on : String @title  : 'Closed on';
     open_on : String @title  : 'Open on';
     assignedIndividual : Association to one Individual;
+}
+
+entity Feedback {
+    key ID : UUID;
+    emailId    :  String(100)   @title  : 'Email ID';
+    service : Association to Service  @title  : 'Service';
+    resolution_time : Association to ResolutionTime @title  : 'Incident Resolution Time';
+    performance : Association to  Performance @title : 'Performance';
+    service_rating : Integer @title  : 'Service Rating';
+    ui_rating : Integer @title  : 'Portal Rating';
 }
 
 entity Logs{
