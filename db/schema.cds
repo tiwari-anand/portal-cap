@@ -27,7 +27,9 @@ entity Incidents {
     key ID : UUID;
     title    :  String(100)   @title  : 'Title';
     description    :  String(100) @title  : 'Description';
-    lti    : Boolean @title  : 'Lost time injury';
+    reporterMail  : String(100)                @title : 'Reporter EmailId';
+    //name      : String(100)                @title : 'Name';
+    lti    : Boolean @title  : 'Lost time injury' default false;
     status    : Association to Status  @title  : 'Status';
     location :  String @title  : 'Location';
     category : Association to Category  @title  : 'Category';
@@ -38,13 +40,14 @@ entity Incidents {
 }
 
 entity Feedback {
-    key ID : UUID;
+    key ID : String(100);
     emailId    :  String(100)   @title  : 'Email ID';
     service : Association to Service  @title  : 'Service';
     resolution_time : Association to ResolutionTime @title  : 'Incident Resolution Time';
     performance : Association to  Performance @title : 'Performance';
     service_rating : Integer @title  : 'Service Rating';
     ui_rating : Integer @title  : 'Portal Rating';
+    comments: String(5000) @title : 'Comments';
 }
 
 entity Logs{

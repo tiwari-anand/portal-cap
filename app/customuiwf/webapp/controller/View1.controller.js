@@ -1,10 +1,11 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "sap/ui/core/mvc/Controller",
+    "sap/base/util/uid"
 ],
 	/**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller) {
+    function (Controller,uid) {
         "use strict";
 
         return Controller.extend("com.sap.customui.wf.customuiwf.controller.View1", {
@@ -18,7 +19,8 @@ sap.ui.define([
             accept: function () {
                 var token;
                 var that = this;
-                var id = this.getOwnerComponent().getModel("contextModel").getData().ID;
+                var incidentData = this.getOwnerComponent().getModel("contextModel").getData();
+                var id = incidentData.ID;
                 var draftEdit = "/v2/low-code/Incidents_draftEdit?PreserveChanges=true&ID=guid'" + id + "'&IsActiveEntity=true";
                 var draftPatch = "/v2/low-code/Incidents(ID=guid'" + id + "',IsActiveEntity=false)";
 
@@ -54,13 +56,38 @@ sap.ui.define([
                     }
                 });
 
+                url ="/v2/low-code/";
+                token = that._fetchToken(url);
+                url= url + "Feedback";
+                id = uid();
+                var data={"ID": id,"emailId" : incidentData.reporterMail};
+                console.log("Sending ", data, " here ", url);
+                jQuery.ajax({
+                        "url": url,
+                        "data":JSON.stringify(data),
+                        "headers": {
+                            "content-type": "application/json",
+                            "X-CSRF-Token": token
+                        },
+                        "type": "POST",
+                        async: false,
+                        success: function (r) {
+                            console.log("Reporter mail and Reference Id set");
+
+                        }, error: function (e) {
+                            console.log(e);
+                        }
+                });
+
+                var body =  { "ID":id,"email":incidentData.reporterMail, "category":incidentData.category_code, "title":incidentData.title};
+                this.sendMail(body);
             },
 
-            reject: function(){
+            sendMail: function(body){
                 var url = "/mailService/";
                 jQuery.ajax({
                         "url": url,
-                        "data":"{\"email\": \"@gmail.com\"}",
+                        "data":JSON.stringify(body),
                         "headers": {
                             "content-type": "application/json"
                         },
@@ -72,7 +99,7 @@ sap.ui.define([
                         }, error: function (e) {
                             console.log(e);
                         }
-                    });
+                });
             },
 
             callPost: function (id, url,token) {

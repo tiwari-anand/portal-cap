@@ -1,6 +1,6 @@
 using { sap.capire.dev as db } from '../db/schema';
 
-service LowCodeService @(requires:'admin') {
+service LowCodeService  @(requires : 'authenticated-user'){
     entity Incidents as projection on db.Incidents;
     entity Status as projection on db.Status;
     entity Category as projection on db.Category;
@@ -24,12 +24,14 @@ Description: { Value: description }
 SelectionFields: [ ID, description, lti,status_code, location,category_code,priority_code],
 LineItem: [
 // { Value: ID },
-// { Value: title },
-{ Value: description },
+{ Value: title },
+{ Value: category.name, Label:'Category' },
+{ Value: priority.name, Label:'Priority' },
+//{ Value: description },
 //{ Value: assignedIndividual.name, Label:'Assigned Individual' },
 { Value: status.name ,Label:'Status'},
 { Value: location },
-{ Value: category.name, Label:'Category' }
+
 ],
 Facets: [
 {

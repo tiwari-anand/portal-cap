@@ -693,9 +693,17 @@
           "type": "cds.String",
           "length": 100
         },
+        "reporterMail": {
+          "@title": "Reporter EmailId",
+          "type": "cds.String",
+          "length": 100
+        },
         "lti": {
           "@title": "Lost time injury",
-          "type": "cds.Boolean"
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
         },
         "status": {
           "@title": "Status",
@@ -766,7 +774,8 @@
       "elements": {
         "ID": {
           "key": true,
-          "type": "cds.UUID"
+          "type": "cds.String",
+          "length": 100
         },
         "emailId": {
           "@title": "Email ID",
@@ -816,6 +825,11 @@
         "ui_rating": {
           "@title": "Portal Rating",
           "type": "cds.Integer"
+        },
+        "comments": {
+          "@title": "Comments",
+          "type": "cds.String",
+          "length": 5000
         }
       }
     },
@@ -839,7 +853,7 @@
     "LowCodeService": {
       "@source": "srv/service.cds",
       "kind": "service",
-      "@requires": "admin"
+      "@requires": "authenticated-user"
     },
     "LowCodeService.Incidents": {
       "kind": "entity",
@@ -877,8 +891,20 @@
       "@UI.LineItem": [
         {
           "Value": {
-            "=": "description"
+            "=": "title"
           }
+        },
+        {
+          "Value": {
+            "=": "category.name"
+          },
+          "Label": "Category"
+        },
+        {
+          "Value": {
+            "=": "priority.name"
+          },
+          "Label": "Priority"
         },
         {
           "Value": {
@@ -890,12 +916,6 @@
           "Value": {
             "=": "location"
           }
-        },
-        {
-          "Value": {
-            "=": "category.name"
-          },
-          "Label": "Category"
         }
       ],
       "@UI.Facets": [
@@ -970,9 +990,17 @@
           "type": "cds.String",
           "length": 100
         },
+        "reporterMail": {
+          "@title": "Reporter EmailId",
+          "type": "cds.String",
+          "length": 100
+        },
         "lti": {
           "@title": "Lost time injury",
-          "type": "cds.Boolean"
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
         },
         "status": {
           "@Common.Text": {
@@ -1753,7 +1781,8 @@
       "elements": {
         "ID": {
           "key": true,
-          "type": "cds.UUID"
+          "type": "cds.String",
+          "length": 100
         },
         "emailId": {
           "@title": "Email ID",
@@ -1803,6 +1832,11 @@
         "ui_rating": {
           "@title": "Portal Rating",
           "type": "cds.Integer"
+        },
+        "comments": {
+          "@title": "Comments",
+          "type": "cds.String",
+          "length": 5000
         }
       }
     },

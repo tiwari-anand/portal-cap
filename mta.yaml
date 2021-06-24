@@ -101,6 +101,8 @@ modules:
 - name: mail-srv
   type: nodejs
   path: mailService/MailerService
+  requires:
+  - name: low-code-db
   provides:
   - name: mailer-api
     properties:

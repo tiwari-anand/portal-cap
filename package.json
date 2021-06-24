@@ -21,6 +21,7 @@
     "eslint": "7.28.x",
     "express": "^4",
     "passport": "^0.4.1",
+    "request": "^2.88.2",
     "rimraf": "3.0.2"
   },
   "devDependencies": {

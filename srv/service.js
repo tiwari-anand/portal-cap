@@ -24,6 +24,10 @@ module.exports = async srv => {
     srv.before('CREATE', 'Incidents', async (req) => {
         var curr_date = new Date().toISOString().slice(0, 10);
         req.data.open_on = curr_date;
+        //console.log(req);
+        console.log(req.user);
+        req.data.reporterMail = req.user.id;
+        //req.data.name = req.user.attr.givenName + " " + req.user.attr.familyName;
     });
 
 
